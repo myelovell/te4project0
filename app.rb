@@ -5,4 +5,15 @@ require "sqlite3"
 
 enable :sessions
 
-get("/")
+get("/") do 
+    slim(:layout)
+end
+
+get("/memory") do 
+    slim(:memoryGame)
+end 
+
+get("/catalog") do 
+    slim(:catalog)
+end
+
