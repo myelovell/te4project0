@@ -14,14 +14,12 @@ get("/memory") do
     slim(:memoryGame)
 end 
 
-get("/catalog") do 
-    slim(:catalog)
+
+
+get("/") do
 end
-
-get("/")
-
 
 get("/catalog") do 
     classmates = get_classmate_data()
-    slim(:"/catalog", locals:{classmates:classmates})
+    slim(:"catalog", locals:{classmates:classmates})
 end
