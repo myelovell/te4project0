@@ -6,9 +6,20 @@ require_relative "model.rb"
 
 enable :sessions
 
-get("/") do
-slim(:layout)
+get("/") do 
+    slim(:layout)
 end
+
+get("/memory") do 
+    slim(:memoryGame)
+end 
+
+get("/catalog") do 
+    slim(:catalog)
+end
+
+get("/")
+
 
 get("/catalog") do 
     classmates = get_classmate_data()
