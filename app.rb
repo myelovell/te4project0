@@ -6,8 +6,9 @@ require_relative "model.rb"
 
 enable :sessions
 
-get("/")
-
+get("/") do
+slim(:layout)
+end
 
 get("/catalog") do 
     classmates = get_classmate_data()
