@@ -35,8 +35,6 @@ rescue SQLite3::Exception => e
     puts "Exception occurred"
     puts e
     
-ensure
-    db.close if db
 end
 
 
