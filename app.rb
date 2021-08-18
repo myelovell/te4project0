@@ -2,7 +2,7 @@
 require "sinatra"
 require "slim"
 require "sqlite3"
-require "model.rb"
+require_relative "model.rb"
 
 enable :sessions
 
@@ -11,4 +11,5 @@ get("/")
 
 get("/catalog") do 
     classmates = get_classmate_data()
-    slim(:"/catalog", locals:[])
+    slim(:"/catalog", locals:{classmates:classmates})
+end
