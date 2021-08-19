@@ -60,14 +60,14 @@ post("/classlist/new") do
 end
 
 post("/classlist/:id/update") do
-    db = SQLite3::Database("db/classlistbra.db")
+    db = SQLite3::Database.new("db/classlistbra.db")
     db.results_as_hash = true 
 
     id = params[:id].to_i
     name = params[:name]
     img = params[:img]
 
-    db.execute("UPDATE classmates SET id=?, name=?, img=?", id, name, img)
+    db.execute("UPDATE classmates SET name=?,img=? WHERE id=?", name, img, id)
     redirect("/catalog")
 end
 

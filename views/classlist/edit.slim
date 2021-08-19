@@ -1,2 +1,6 @@
 h2 Edit classlist
 h1 = "#{result}"
+form action="/classlist/#{result['id']}/update" method="post"
+    input type="text" name="name" placeholder="#{result["name"]}"
+    input type="text" name="img" placeholder="#{result["img"]}"
+    input type="submit" value="Change"
