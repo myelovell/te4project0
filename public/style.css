@@ -7,23 +7,25 @@ body {
 header {
     background-color: rgba(255, 255, 255, 0.5);
     width: 100vw;
-    height: 80px;
+    height: 200px;
     display: flex;
     justify-content: flex-start;
 }
 
 header-left {
     width: 50vw;
-    height: 80px;
+    height: 200px;
     display: flex;
     justify-content: flex-start;
+    background-color: aqua;
 }
 
 header-right {
     width: 50vw;
-    height: 80px;
+    height: 200px;
     display: flex;
     justify-content: flex-end;
+    background-color: blueviolet;
 }
 
 header-left a {
@@ -32,13 +34,28 @@ header-left a {
     margin-top: auto;
     margin-bottom: auto;
     padding-left: 30px;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: 200;
 }
 
 header-right img {
-    width: 80px * 0,71484375;
-    height: 80px;
+    /**width: 200px * 0,71484375;**/
+    height: 250px;
     padding-right: 30px;
+    margin-top: 0;
     object-fit: scale-down;
+}
+
+section-sqaures{
+    display: flex;
+    padding-left: 200px;
+    width: 2000px;
+    background-color: darkred;
+}
+
+section-sqaures div{
+    background-color: chartreuse;
+    height: 500px;
+    width: 500px;
+    padding-left: 100px;
 }
