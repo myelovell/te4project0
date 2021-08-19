@@ -11,9 +11,12 @@ end
 
 get("/memory") do 
     classmates = get_classmate_data()
-    length = classmates.length
-    right_choice_id = rand(1..length) 
-    slim(:"memoryGame", locals:{classmates:classmates, right_choice_id:right_choice_id})
+    array_with_id = []
+    classmates.each do |mate|
+        array_with_id << mate["id"]
+    end
+    right_choice_id = array_with_id.shuffle[0] 
+    slim(:"memoryGame", locals:{classmates:classmates, right_choice_id:right_choice_id, array_with_id:array_with_id})
 end 
 
 get("/catalog") do 
