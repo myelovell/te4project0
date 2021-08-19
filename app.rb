@@ -82,10 +82,11 @@ get("/classlist/:id/edit") do
 end
 
 post("/classlist/:id/delete") do 
-    db = SQLite3::Database("db/classlistbra.db")
+    db = SQLite3::Database.new("db/classlistbra.db")
     id = params[:id].to_i
 
     db.execute("DELETE FROM classmates WHERE id=?", id)
+    redirect("/classlist")
 end 
 
 

@@ -1,5 +1,7 @@
 /correct recursive func 
 -classlist.each do |student|
+    p = student["name"]
+    img src="public/img/#{student["img"]}" alt=""
     form method="get" action="classlist/#{student['id']}/edit"
         input type="submit" value="Edit"
     form method="post" action="classlist/#{student['id']}/delete"
