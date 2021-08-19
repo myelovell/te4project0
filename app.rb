@@ -55,23 +55,35 @@ end
 post("/classlist/new") do
    db = SQLite3::Database.new("db/classlistbra.db")
 
-   name = params[:name]
-   img = params[:img]
+    name = params[:name]
+    @filename = params[:file][:filename]
+    file = params[:file][:tempfile]
 
-   db.execute("INSERT INTO classmates (name, img) VALUES (?, ?)", name, img)
+    File.open("public/img/students/#{@filename}", "wb") do |f|
+        f.write(file.read)
+    end
+
+   db.execute("INSERT INTO classmates (name, img) VALUES (?, ?)", name, @filename)
    redirect("/catalog")
 end
 
+# TODO: kolla om fil är uppladdad eller inte, eller om namn saknas (att bara bilden är ändrad)
+# om fil ej är uppladdad ska endast namn ändras, vice versa // linus
 post("/classlist/:id/update") do
     db = SQLite3::Database.new("db/classlistbra.db")
     db.results_as_hash = true 
 
     id = params[:id].to_i
     name = params[:name]
-    img = params[:img]
+    @filename = params[:file][:filename]
+    file = params[:file][:tempfile]
 
-    db.execute("UPDATE classmates SET name=?,img=? WHERE id=?", name, img, id)
-    redirect("/catalog")
+    File.open("public/img/students/#{@filename}", "wb") do |f|
+        f.write(file.read)
+    end
+
+    db.execute("UPDATE classmates SET name=?,img=? WHERE id=?", name, @filename, id)
+    redirect("/classlist")
 end
 
 get("/classlist/:id/edit") do
@@ -92,9 +104,8 @@ post("/classlist/:id/delete") do
     redirect("/classlist")
 end 
 
+post('/classlist/upload-image') do
+    db = SQLite3::Database.new('db/classlistbra.db')
 
-
-
-
-
-
+    redirect('/classlist')
+end

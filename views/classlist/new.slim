@@ -1,5 +1,5 @@
 / input correct url input type
-form action="/classlist/new" method="post"
+form action="/classlist/new" method="post" enctype="multipart/form-data"
     input type="text" name="name" placeholder="Full Name"
-    input type="text" name="img" placeholder="IMG Url"
+    input type="file" name="file" accept="image/png, image/jpg, image/jpeg"
     input type="submit" value="Add Student"
