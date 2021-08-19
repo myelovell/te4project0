@@ -45,61 +45,68 @@ get("/classlist") do
     db.result_as_hash = true
 
     #check actual var names later
-    studentId = params[:stidentId].to_i
-    firstName = params[:firstName]
-    surName = params[:surname]
-    imgUrl = params[:imgUrl]
+    id = params[:id].to_i
+    name = params[:name]
+    img = params[:img]
 
-    result = db.execute("SELECT * From classlist WHERE studentId=?", studentId)
-    slim(:catalog, locals:{studentId:result})
-
+    result = db.execute("SELECT * From classmates WHERE id=?", id)
+    slim(:catalog, locals:{result:result})
 end
 
 get("/classlist/new") do
-    slim(:classlist/new)
+    slim(:"classlist/new")
 end 
+
+# TODO: fixa id-ökning
+get("/classlist/ids") do
+    db = SQLite3::Database.new("db/classlistbra.db")
+    db.results_as_hash = true
+    
+    result = db.execute("SELECT id, name From classmates")
+    str = ""
+    result.each do |id|
+        puts id
+    end
+    str
+end
 
 post("/classlist/new") do
    db = SQLite3::Database.new("db/classlistbra.db")
-   firstName = params[:firstName]
-   surName = params[:surname]
-   #imgUrl = params[:imgUrl] fix correct input later
 
-   db.execute("INSERT INTO classlist (firstName, surname, imgUrl) VALUES (?, ?, ?)", firstName, surname, imgUrl) 
+   name = params[:name]
+   img = params[:img]
 
+   db.execute("INSERT INTO classmates (name, img) VALUES (?, ?)", name, img)
+   redirect("/catalog")
 end
 
-post("/classlist/:studentId/update") do
-    db = SQLite3::Database("bd/classlistbra.db")
+post("/classlist/:id/update") do
+    db = SQLite3::Database("db/classlistbra.db")
     db.result_as_hash = true 
 
-    studentId = params[:studentId].to_i
-    firstName = params[:firstName]
-    surname = params[:surname]
-    #imgUrl = params[:imgUrl] fix correct input later
+    id = params[:id].to_i
+    name = params[:name]
+    img = params[:img]
 
-    db.execute("UPDATE classlist SET firstName=?, surname=?, imgUrl=?", firstName, surname, imgUrl)
+    db.execute("UPDATE classmates SET id=?, name=?, img=?", id, name, img)
     redirect("/catalog")
 end
 
-post("/classlist/:studentId/edit") do 
-    db = SQLite3::Database("bd/classlistbra.db")
-    db.result_as_hash = true 
+get("/classlist/:id/edit") do
+    db = SQLite3::Database.new("db/classlistbra.db")
+    db.results_as_hash = true 
 
-    studentId = params[:studentId].to_i
+    id = params[:id].to_i
 
-    result = db.execute("SELECT * FROM classlist WHERE studentId=?", studentId).first
-    slim(:"/classlist/edit", locals{result:result})
+    result = db.execute("SELECT * FROM classmates WHERE id=?", id).first
+    slim(:"/classlist/edit", locals:{result:result})
 end
 
+post("/classlist/:id/delete") do 
+    db = SQLite3::Database("db/classlistbra.db")
+    id = params[:id].to_i
 
-
-post("/classlist/:studentId/delete") do 
-    db = SQLite3::Database("bd/classlistbra.db")
-    studentId = params[:studentId].to_i
-
-    db.execute("DELETE FROM classlist WHERE studentId=?", studentId)
-
+    db.execute("DELETE FROM classmates WHERE id=?", id)
 end 
 
 
