@@ -1,8 +1,12 @@
 /correct recursive func 
 -classlist.each do |student|
-    p = student["name"]
-    img src="/img/students/#{student['img']}"
-    form method="get" action="classlist/#{student['id']}/edit"
-        input type="submit" value="Edit"
-    form method="post" action="classlist/#{student['id']}/delete"
-        input type="submit" value="Delete"
+    div class="student_list"
+        div class="mugshot"
+            img src="/img/students/#{student['img']}"
+        div class="student_content"
+            p = student["name"]
+            div class="manage_students"
+                form method="get" action="classlist/#{student['id']}/edit"
+                    input type="image" src="img/edit.png" class="edit"
+                form method="post" action="classlist/#{student['id']}/delete"
+                    input type="image" src="img/delete_icon.png" id="delete"
