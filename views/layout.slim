@@ -5,12 +5,15 @@ html lang="en"
         meta charset="UTF-8"/
         meta http-equiv="X-UA-Compatible" content="IE=edge"/
         meta name="viewport" content="width=device-width, initial-scale=1.0"/
-        link rel="stylesheet" href="../css/main.css"/
+        link rel="stylesheet" href="/style.css"/
         title="Project 0"
     body 
         == yield
-        header 
-            a href="/catalog" Classlist Catalog 
-            a href="/memoryGame" Memory Game     
-    
-      
+        header
+            header-left
+                a href="/home" Home
+                a href="/catalog" Catalog 
+                a href="/memoryGame" Memory
+            header-right
+                a href="https://www.ntigymnasiet.se"
+                    img src="/nti.png"

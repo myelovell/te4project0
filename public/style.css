@@ -1,0 +1,44 @@
+body {
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+header-left {
+    width: 50vw;
+    height: 80px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+header-right {
+    width: 50vw;
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+header-left a {
+    color: black;
+    text-decoration: none;
+    margin-top: auto;
+    margin-bottom: auto;
+    padding-left: 30px;
+    font-size: 18px;
+    font-weight: 200;
+}
+
+header-right img {
+    width: 80px * 0,71484375;
+    height: 80px;
+    padding-right: 30px;
+    object-fit: scale-down;
+}
