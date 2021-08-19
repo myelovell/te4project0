@@ -6,11 +6,11 @@ require "slim"
 enable :sessions
 
 get("/") do 
-    slim(:layout)
+    slim(:"index")
 end
 
 get("/memory") do 
-    slim(:memoryGame)
+    slim(:"memoryGame")
 end 
 
 get("/catalog") do 
