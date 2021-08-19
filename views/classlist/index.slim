@@ -1,8 +1,6 @@
-    input type="submit" value="Add new student"
-
 /correct recursive func 
--classlist.each do |student| 
-    form method="get" action="classlist/#{student['studentId']}/edit"
+-classlist.each do |student|
+    form method="get" action="classlist/#{student['id']}/edit"
         input type="submit" value="Edit"
-    form method="post" action="classlist/#{student['studentId']}/delete"
+    form method="post" action="classlist/#{student['id']}/delete"
         input type="submit" value="Delete"

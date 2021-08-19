@@ -41,33 +41,12 @@ end
 # end
 
 get("/classlist") do 
-    db = SQLite3::Database.new("db/classlistbra.db")
-    db.result_as_hash = true
-
-    #check actual var names later
-    id = params[:id].to_i
-    name = params[:name]
-    img = params[:img]
-
-    result = db.execute("SELECT * From classmates WHERE id=?", id)
-    slim(:catalog, locals:{result:result})
+    classmates = get_classmate_data()
+    slim(:"/classlist/index", locals:{classlist:classmates})
 end
 
 get("/classlist/new") do
     slim(:"classlist/new")
-end 
-
-# TODO: fixa id-ökning
-get("/classlist/ids") do
-    db = SQLite3::Database.new("db/classlistbra.db")
-    db.results_as_hash = true
-    
-    result = db.execute("SELECT id, name From classmates")
-    str = ""
-    result.each do |id|
-        puts id
-    end
-    str
 end
 
 post("/classlist/new") do
@@ -82,7 +61,7 @@ end
 
 post("/classlist/:id/update") do
     db = SQLite3::Database("db/classlistbra.db")
-    db.result_as_hash = true 
+    db.results_as_hash = true 
 
     id = params[:id].to_i
     name = params[:name]
