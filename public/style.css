@@ -39,8 +39,8 @@ header-left a {
 }
 
 header-right img {
-    /**width: 200px * 0,71484375;**/
-    height: 250px;
+    width: 80px * 0,71484375;
+    height: 80px;
     padding-right: 30px;
     margin-top: 0;
     object-fit: scale-down;
