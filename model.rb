@@ -4,3 +4,4 @@ def get_classmate_data()
     classmates = db.execute("SELECT * FROM classmates")
     return classmates
 end
+
