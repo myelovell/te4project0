@@ -1,20 +1,21 @@
 /correct recursive func 
+form action="/classlist/choose_class" method="post"
+    select name="Class" 
+        option value="" style="display:none"  hej
+        -grades.each do |grade|
+            option value="#{grade["grade"]}" #{grade["grade"]}
+    input type="submit" value="Choose!"
+        
 -classlist.each do |student|
     div class="student_list"
         div class="mugshot"
             img src="/img/students/#{student['img']}"
         div class="student_content"
             p = student["name"]
+        div class="student_grade"
+            p = student["grade"]
             div class="manage_students"
                 form method="get" action="classlist/#{student['id']}/edit"
                     input type="image" src="img/edit.png" class="edit"
                 form method="post" action="classlist/#{student['id']}/delete"
-                    input type="image" src="img/delete_icon.png" id="delete" onclick="myFunction()"
-
-script
-    function myFunction()
-        if confirm("Press a button!"))
-            txt = "You pressed OK!";
-        else
-            txt = "You pressed Cancel!";
-        document.getElementById("demo").innerHTML = txt;
+                    input type="image" src="img/delete_icon.png" id="delete"
