@@ -9,4 +9,12 @@
                 form method="get" action="classlist/#{student['id']}/edit"
                     input type="image" src="img/edit.png" class="edit"
                 form method="post" action="classlist/#{student['id']}/delete"
-                    input type="image" src="img/delete_icon.png" id="delete"
+                    input type="image" src="img/delete_icon.png" id="delete" onclick="myFunction()"
+
+script
+    function myFunction()
+        if confirm("Press a button!"))
+            txt = "You pressed OK!";
+        else
+            txt = "You pressed Cancel!";
+        document.getElementById("demo").innerHTML = txt;
