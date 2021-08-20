@@ -103,10 +103,4 @@ post("/classlist/:id/delete") do
 
     db.execute("DELETE FROM classmates WHERE id=?", id)
     redirect("/classlist")
-end 
-
-post('/classlist/upload-image') do
-    db = SQLite3::Database.new('db/classlistbra.db')
-
-    redirect('/classlist')
 end
