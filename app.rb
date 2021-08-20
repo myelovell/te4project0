@@ -68,19 +68,27 @@ post("/classlist/new") do
    redirect("/catalog")
 end
 
-# TODO: kolla om fil är uppladdad eller inte, eller om namn saknas (att bara bilden är ändrad)
-# om fil ej är uppladdad ska endast namn ändras, vice versa // linus
 post("/classlist/:id/update") do
     db = SQLite3::Database.new("db/classlistbra.db")
     db.results_as_hash = true 
 
     id = params[:id].to_i
     name = params[:name]
-    @filename = params[:file][:filename]
-    file = params[:file][:tempfile]
+    if(name == "") then
+        name = db.execute("SELECT name FROM classmates WHERE id=?", id).first['name']
+    end
 
-    File.open("public/img/students/#{@filename}", "wb") do |f|
-        f.write(file.read)
+    begin
+        @filename = params[:file][:filename]
+        file = params[:file][:tempfile]
+
+        File.open("public/img/students/#{@filename}", "wb") do |f|
+            f.write(file.read)
+        end
+
+        # Rescue körs om bild ej är uppladdad
+        rescue
+            @filename = db.execute("SELECT img FROM classmates WHERE id=?", id).first['img']
     end
 
     db.execute("UPDATE classmates SET name=?,img=? WHERE id=?", name, @filename, id)
