@@ -161,9 +161,6 @@ header-right img {
 
 .manage_students{
     display: inline-block;
-    position: absolute;
-    bottom:0;
-    right:0;
     height: 250px;
 }
 
