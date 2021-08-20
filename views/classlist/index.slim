@@ -1,5 +1,3 @@
-
-
 /correct recursive func 
 form action="/classlist/choose_class" method="get"
     select name="grade" 
@@ -11,6 +9,8 @@ form action="/classlist/choose_class" method="get"
                 option value="#{grade["grade"]}" #{grade["grade"]}
         input type="submit" value="Choose!"
 
+a href="/classlist/new"
+    button New student
     
 -classlist.each do |student|
     div class="student_list"
