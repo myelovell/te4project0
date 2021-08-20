@@ -1,11 +1,17 @@
+
+
 /correct recursive func 
-form action="/classlist/choose_class" method="post"
-    select name="Class" 
-        option value="" style="display:none"  hej
+form action="/classlist/choose_class" method="get"
+    select name="grade" 
+        /option value="" style="display:none"  hej        ??????? funkar ej om tid fixa
         -grades.each do |grade|
-            option value="#{grade["grade"]}" #{grade["grade"]}
-    input type="submit" value="Choose!"
-        
+            - if choosen_class == grade['grade']
+                option selected="selected" value="#{grade["grade"]}"  #{grade["grade"]}
+            - else
+                option value="#{grade["grade"]}" #{grade["grade"]}
+        input type="submit" value="Choose!"
+
+    
 -classlist.each do |student|
     div class="student_list"
         div class="mugshot"
@@ -16,6 +22,6 @@ form action="/classlist/choose_class" method="post"
             p = student["grade"]
             div class="manage_students"
                 form method="get" action="classlist/#{student['id']}/edit"
-                    input type="image" src="img/edit.png" class="edit"
+                    input type="image" src="/img/edit.png" class="edit"
                 form method="post" action="classlist/#{student['id']}/delete"
-                    input type="image" src="img/delete_icon.png" id="delete"
+                    input type="image" src="/img/delete_icon.png" id="delete"

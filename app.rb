@@ -47,12 +47,22 @@ end
 get("/classlist") do 
     classmates = get_classmate_data()
     grades = get_grades()
-    slim(:"/classlist/index", locals:{classlist:classmates, grades:grades})
+    slim(:"/classlist/index", locals:{classlist:classmates, grades:grades, choosen_class:nil})
 end
 
 get("/classlist/new") do
     slim(:"classlist/new")
 end
+
+get("/classlist/choose_class") do
+    choosen_class = params[:grade]
+    classmates = get_specific_classmate_data(choosen_class)
+    grades = get_grades()
+    slim(:"/classlist/index", locals:{classlist:classmates, grades:grades, choosen_class:choosen_class})
+end
+
+
+
 
 post("/classlist/new") do
    db = SQLite3::Database.new("db/classlistbra.db")
