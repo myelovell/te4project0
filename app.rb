@@ -9,6 +9,7 @@ get("/") do
     slim(:"index")
 end
 
+
 get("/memory") do 
     classmates = get_classmate_data()
     array_with_id = []
