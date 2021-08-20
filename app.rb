@@ -46,7 +46,8 @@ end
 
 get("/classlist") do 
     classmates = get_classmate_data()
-    slim(:"/classlist/index", locals:{classlist:classmates})
+    grades = get_grades()
+    slim(:"/classlist/index", locals:{classlist:classmates, grades:grades})
 end
 
 get("/classlist/new") do
