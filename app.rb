@@ -66,7 +66,7 @@ end
 
 post("/classlist/new") do
    db = SQLite3::Database.new("db/classlistbra.db")
-
+    grade = params[:grade]
     name = params[:name]
     @filename = params[:file][:filename]
     file = params[:file][:tempfile]
@@ -75,7 +75,7 @@ post("/classlist/new") do
         f.write(file.read)
     end
 
-   db.execute("INSERT INTO classmates (name, img) VALUES (?, ?)", name, @filename)
+   db.execute("INSERT INTO classmates (name, img, grade) VALUES (?, ?, ?)", name, @filename, grade)
    redirect("/catalog")
 end
 
@@ -85,8 +85,13 @@ post("/classlist/:id/update") do
 
     id = params[:id].to_i
     name = params[:name]
+    grade = params[:grade]
     if(name == "") then
         name = db.execute("SELECT name FROM classmates WHERE id=?", id).first['name']
+    end
+
+    if(grade == "") then
+        grade = db.execute("SELECT grade FROM classmates WHERE id=?", id).first['grade']
     end
 
     begin
@@ -102,7 +107,7 @@ post("/classlist/:id/update") do
             @filename = db.execute("SELECT img FROM classmates WHERE id=?", id).first['img']
     end
 
-    db.execute("UPDATE classmates SET name=?,img=? WHERE id=?", name, @filename, id)
+    db.execute("UPDATE classmates SET name=?,img=?, grade=? WHERE id=?", name, @filename, grade, id)
     redirect("/classlist")
 end
 
@@ -113,7 +118,8 @@ get("/classlist/:id/edit") do
     id = params[:id].to_i
 
     result = db.execute("SELECT * FROM classmates WHERE id=?", id).first
-    slim(:"/classlist/edit", locals:{result:result})
+    grades = get_grades()
+    slim(:"/classlist/edit", locals:{result:result, grades:grades})
 end
 
 post("/classlist/:id/delete") do 

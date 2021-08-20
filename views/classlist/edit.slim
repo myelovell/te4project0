@@ -3,4 +3,7 @@ h1 = "#{result}"
 form action="/classlist/#{result['id']}/update" method="post" enctype="multipart/form-data"
     input type="text" name="name" placeholder="#{result["name"]}"
     input type="file" name="file" accept="image/png, image/jpg, image/jpeg"
+    select name="grade" 
+        -grades.each do |grade|
+            option  value="#{grade["grade"]}" selected="selected" #{grade["grade"]}
     input type="submit" value="Change"
