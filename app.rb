@@ -76,7 +76,7 @@ post("/classlist/new") do
     end
 
    db.execute("INSERT INTO classmates (name, img, grade) VALUES (?, ?, ?)", name, @filename, grade)
-   redirect("/catalog")
+   redirect("/classlist")
 end
 
 post("/classlist/:id/update") do
